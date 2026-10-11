@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Stock</title>
+
+    <link rel="stylesheet" href="{% static 'style.css' %}?v=3">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📦 Add Stock</h1>
+
+    <div class="product-card">
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit" class="add-btn">
+                ➕ Add Stock
+            </button>
+
+        </form>
+
+        <br>
+
+        <a href="{% url 'stock_list' %}">
+            ← Back to Stock
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

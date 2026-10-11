@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>StockFlow Products</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}?v=2">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>📦 StockFlow Products</h1>
+
+        <a href="{% url 'add_product' %}" class="add-btn">
+            + Add Product
+        </a>
+        {% if low_stock_products %}
+        <div class="low-stock-alert">
+            <h2>⚠️ Low Stock Alert!</h2>
+
+            {% for product in low_stock_products %}
+            <p>
+                {{ product.name }} —
+                Only {{ product.quantity }} items left!
+            </p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% for product in products %}
+
+        <div class="product-card">
+
+            <h2>{{ product.name }}</h2>
+
+            <p>📂 Category: {{ product.category }}</p>
+
+            <p>💰 Price: ₹{{ product.price }}</p>
+
+            <p>📦 Quantity: {{ product.quantity }}</p>
+
+            <p>🏢 Supplier: {{ product.supplier.name }}</p>
+
+            <a href="{% url 'edit_product' product.id %}" class="edit-btn">
+                ✏️ Edit
+            </a>
+
+            <a href="{% url 'delete_product' product.id %}" class="delete-btn">
+                🗑️ Delete
+            </a>
+
+        </div>
+
+        {% empty %}
+
+        <p>No products available.</p>
+
+        {% endfor %}
+
+    </div>
+
+</body>
+
+</html>

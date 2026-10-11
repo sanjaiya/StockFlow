@@ -1,0 +1,70 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>StockFlow Stock</title>
+
+    <link rel="stylesheet" href="{% static 'style.css' %}?v=2">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>📦 StockFlow Stock</h1>
+
+        <form method="GET" class="search-form">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="🔎 Search product..."
+        value="{{ request.GET.search }}"
+    >
+
+    <button type="submit">
+        Search
+    </button>
+
+    <a href="{% url 'stock_list' %}">
+        Clear
+    </a>
+
+</form>
+
+        <a href="{% url 'add_stock' %}" class="add-btn">
+            + Add Stock
+        </a>
+
+        {% for stock in stocks %}
+
+        <div class="product-card">
+
+            <h2>{{ stock.product.name }}</h2>
+
+            <p>📦 Quantity: {{ stock.quantity }}</p>
+
+            <p>🕒 Updated: {{ stock.updated_at }}</p>
+
+            <a href="{% url 'edit_stock' stock.id %}" class="edit-btn">
+                ✏️ Edit
+            </a>
+            <a href="{% url 'delete_stock' stock.id %}" class="delete-btn">
+                🗑️ Delete
+            </a>
+
+        </div>
+
+        {% empty %}
+
+        <p>No stock available.</p>
+
+        {% endfor %}
+
+    </div>
+
+</body>
+
+</html>
