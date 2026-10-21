@@ -1,4 +1,4 @@
-# StockFlow – Quality & Inventory Management System
+# StockFlow â€“ Inventory Management System
 
 ## About
 StockFlow is a web-based inventory management system built using Python and Django. It helps manage products, suppliers, and stock records.
